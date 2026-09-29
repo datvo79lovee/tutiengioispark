@@ -1,0 +1,321 @@
+                         WEB/APP
+                            │
+                            ▼
+                 ┌────────────────────┐
+                 │   TRA CỨU CÁN BỘ   │
+                 │ Mã CB / Họ tên...  │
+                 └─────────┬──────────┘
+                           │
+                           ▼
+              ┌──────────────────────────┐
+              │     THÔNG TIN CƠ BẢN     │
+              │                          │
+              │ Mã đơn vị:  XXXX         │
+              │ Mã cán bộ:  CB001        │
+              │ Họ tên:     Nguyễn...    │
+              │ CCCD:       ........     │
+              │ Địa chỉ:    ........     │
+              │ Ngày sinh:  ........     │
+              │ Tuổi:       36           │
+              │ Đảng viên:  Có           │
+              └────────────┬─────────────┘
+                           │
+                       XEM HỒ SƠ
+                           │
+                           ▼
+              ┌──────────────────────────┐
+              │     HỒ SƠ CÁN BỘ         │
+              ├──────────────────────────┤
+              │ 📁 1. Sơ yếu lý lịch     │
+              │ 📁 2. Bổ sung lý lịch    │
+              │ 📁 3. Kê khai tài sản    │
+              │ 📁 4. Tuyển dụng         │
+              │ 📁 5. Quyết định         │
+              │ 📁 6. Văn bằng/chứng chỉ │
+              │ 📁 7. Đánh giá công tác  │
+              │ 📁 8. Văn bản khác       │
+              └──────────────────────────┘
+DSCBNV.xlsx (<100 cán bộ)
+        │
+        ▼
+ Python + Pandas
+        │
+        ▼
+    STG_CANBO
+        │
+        ▼
+Validate → Clean → Transform
+        │
+        ▼
+     SQL SERVER
+        │
+ ┌──────┼──────────────┐
+ ▼      ▼              ▼
+CANBO  LOAITAILIEU  HOSODINHKEM
+        │
+        ▼
+      FastAPI
+        │
+        ▼
+      WEB/APP
+        │
+        ├── Tra cứu cán bộ
+        ├── Thông tin cơ bản
+        └── 8 nhóm hồ sơ → xem tài liệu
+
+
+M1  Phân tích yêu cầu & dữ liệu nguồn             ✅
+ ↓
+M2  Thiết kế Core Database                        ✅
+ ↓
+M3  Xây dựng Staging Layer                        ✅
+ ↓
+M4  Xây dựng ETL Pipeline                         🔄 ĐANG LÀM
+ │
+ ├─ M4.1 Python ↔ SQL Server                      ✅
+ ├─ M4.2 Đọc & profile Excel                      ✅
+ ├─ M4.3 Load Excel → Staging                     ✅
+ ├─ M4.4 Clean + Validate + JOIN cán bộ           ✅  
+  	M4.4.1  Đọc đúng batch từ Staging
+  	M4.4.2  Clean từng trường
+  	M4.4.3  Match cán bộ giữa 2 sheet
+  	M4.4.4  Sinh MACANBO + SĐT mô phỏng
+  	M4.4.5  Validate + Full Outer Join
+		M4.4 CLEAN + TRANSFORM
+├─ Cleaning                         ✅
+├─ Unicode normalization            ✅
+├─ Chuẩn hóa Sĩ → Sỹ                ✅
+├─ Validate match key               ✅
+├─ Match Sheet 1 ↔ Sheet 2          ✅
+│   ├─ both = 52
+│   ├─ left_only = 1
+│   └─ right_only = 0
+├─ Build CANBO_FINAL                ✅
+├─ 53 cán bộ duy nhất               ✅
+└─ Sinh MACANBO 9 chữ số            ✅
+
+
+
+ ├─ M4.5 Load → CANBO                             ⏳
+	M4.5.1  Prepare CANBO_LOAD          ✅
+	M4.5.2  Validate before load        ✅
+	M4.5.3  Load → dbo.CANBO            ✅
+	M4.5.4	Incremental / rerunnable load
+	Dữ liệu lần sau → UPDATE/INSERT        ✅
+
+
+
+M4.6 Word ETL
+├── M4.6.1 Inventory Word                    ✅
+├── M4.6.2 Profile 1 Word                    ✅
+├── M4.6.3 Profile toàn bộ Word              ✅
+├── M4.6.4 Phân loại cấu trúc                ✅
+├── M4.6.5 Flexible Parser                   ✅
+│      33/33 file parse thành công
+│      1.512 raw records
+│
+├── M4.6.6 Data Quality / Validate           ✅
+├── M4.6.7 Match Word ↔ CANBO                ✅
+│      33/33 cán bộ có Word matched
+│
+├── M4.6.8 Load STG_HOSO                     ✅
+│      Latest batch: 20260924_192039
+│      1.512 records
+│
+├── M4.6.9 Transform + Validate HOSO          ✅
+│      1.512 MATCHED
+│      0 DQ issues
+│
+└── M4.6.10 Load → dbo.HOSODINHKEM           ✅
+       1.512 records
+       33 cán bộ có hồ sơ
+       Post-load validation PASS
+
+
+M4 Word ETL                                  ✅
+↓
+M5 – DATA QUALITY & LOGGING                  ✅
+
+	M5.1 Rà soát Data Quality hiện có            ✅
+	M5.2 Thiết kế Logging                        ✅
+	M5.3 Tạo dbo.ETL_LOG                         ✅
+	M5.4 Xây etl_logger.py                       ✅
+     		├─ start_log()
+     		├─ success_log()
+     		└─ fail_log()
+	M5.5 Tích hợp Logging vào Word pipeline      ✅
+	M5.6 Test SUCCESS / DQ FAILED / TECH FAILED  ✅
+	M5.7 Post-run validation                     ✅
+
+Kết quả:
+• Latest batch: 20260924_192039
+• Source: 1.512
+• Target: 1.512
+• DQ issues: 0
+• Final status: SUCCESS↓
+M6 Backend API                               ⏳
+↓
+M7 Web/App                                   ⏳
+↓
+M8 Testing + hoàn thiện + tài liệu           ⏳
+
+
+
+
+
+Excel → Staging → Clean → Validate → Match
+      → Transform → CANBO_FINAL
+      → Validate → Transaction → dbo.CANBO
+                                      ↓
+                                  53 records ✅
+Word hiện tại + Word mới
+          ↓
+parse_word.py
+          ↓
+match_word_canbo.py
+          ↓
+load_word_staging.py
+          ↓
+BATCH_ID mới
+          ↓
+transform_hoso.py
+          ↓
+validate
+          ↓
+load_hoso_core.py   ← bước mình sắp xây
+          ↓
+HOSODINHKEM
+
+Máy người dùng
+     │
+     │ HTTP
+     ▼
+Web Browser
+     │
+     │ Request
+     ▼
+FastAPI Server
+     │
+     │ TCP/IP
+     ▼
+SQL Server
+     │
+     ▼
+Database
+
+
+
+000000053	Đặng Thị Mai Hiên	1983-12-18	Nhân viên	Kế toán ngân quỹ
+000000050	Đinh Thị Thuận	1996-07-16	Nhân viên	Khách hàng
+000000005	Hoàng Thị Thu Hoài	1985-02-18	Nhân viên	Tô Hiến Thành
+000000008	Lê Nguyễn Thanh Ngân	2000-10-16	Nhân viên	Kế toán ngân quỹ
+000000009	Lê Phượng Vân	1989-05-04	Phó trưởng phòng PT	Khách hàng
+000000011	Mai Ngọc Thiện	1990-08-13	Phó trưởng phòng	Khách hàng
+000000012	Mai Ngọc Thịnh	1985-01-13	Phó trưởng phòng	Khách hàng
+000000033	Ngô Quang Duy	2001-09-29	Nhân viên	Khách hàng
+000000034	Ngô Thị Hoài Thương	1997-07-31	Nhân viên	Kế toán ngân quỹ
+000000019	Nguyễn Sỹ Trí Minh	1979-01-26	Nhân viên	Phù Đổng
+000000020	Nguyễn Thanh Trí	1994-03-10	Nhân viên	Khách hàng
+000000027	Nguyễn Tri Việt Ân	1983-01-01	Phó Giám đốc	Ban Giám đốc
+000000031	Nguyễn Xuân Tân	1985-08-02	Giám đốc PGD	Phù Đổng
+000000037	Phạm Thị Như Quỳnh	1992-01-01	Nhân viên	Kế toán ngân quỹ
+000000036	Phan Quốc Tuấn	1990-10-10	Nhân viên	Tổng hợp
+000000041	Trần He Rô	1989-09-06	NULL	NULL
+000000043	Trần Thị Lan Anh	1982-10-12	Nhân viên	Phù Đổng
+000000045	Trần Thị Thùy	1993-12-05	Phó trưởng phòng	Tổng hợp
+000000040	Trình Ngọc Long	1976-12-30	Phó Giám đốc	Ban Giám đốc
+000000048	Vũ Thị Ngọc Anh	1986-10-13	Phó trưởng phòng PT	Tổng hợp
+
+SOURCE
+ Excel / Word
+     │
+     ▼
+  STAGING
+     │
+     ▼
+ CLEAN + TRANSFORM
+     │
+     ▼
+DATA QUALITY
+     │
+ ┌───┴────┐
+ │        │
+PASS     FAIL
+ │        │
+ ▼        └─────► Không load Core
+CORE
+ │
+ ▼
+CANBO / HOSODINHKEM
+
+         │
+         └────────────► ETL_LOG
+                        Batch nào?
+                        Chạy lúc nào?
+                        Input bao nhiêu?
+                        Output bao nhiêu?
+                        Có bao nhiêu lỗi?
+                        SUCCESS / FAILED?
+                        Lỗi gì?
+
+1. Mở connection
+       ↓
+2. Tạo cursor
+       ↓
+3. Execute SQL
+       ↓
+4. COMMIT
+   "Tôi xác nhận thay đổi"
+       ↓
+5. Close cursor
+   "Tôi dùng SQL xong rồi"
+       ↓
+6. Close connection
+   "Tôi ngắt kết nối DB"
+
+
+
+
+                 TRANG TRA CỨU
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+   Hiện danh sách             Ô tìm kiếm
+   toàn bộ cán bộ            "Nguyễn Văn..."
+          │                       │
+          └───────────┬───────────┘
+
+
+
+
+                      ▼
+              Danh sách kết quả
+
+        ┌──────────────────────────┐
+        │ Nguyễn Văn A             │
+        │ Phòng/Ban: ...           │
+        │ Chức vụ: ...             │
+        │        [Xem chi tiết]    │
+        └──────────────────────────┘
+                      │
+                      ▼
+               THÔNG TIN CÁN BỘ
+                      │
+          ┌───────────┴──────────┐
+          │ Họ tên               │
+          │ Mã cán bộ            │
+          │ Đơn vị               │
+          │ Giới tính            │
+          │ Ngày sinh / Tuổi     │
+          │ Đảng viên            │
+          │ Chức danh/chức vụ    │
+          │ Phòng/Ban            │
+          │ SĐT                  │
+          │ E-learning           │
+          │ Thời gian nhận việc  │
+          └──────────────────────┘
+                      │
+                  [Xem hồ sơ]
+                      │
+                      ▼
+                 Hồ sơ I–VII
