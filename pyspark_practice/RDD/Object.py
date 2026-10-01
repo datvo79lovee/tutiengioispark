@@ -1,17 +1,15 @@
-from pyspark import SparkContext
+from pyspark import SparkConf, SparkContext
 
-#create sparkcontext
-sc = SparkContext("local", "datvo")
+config = SparkConf().setAppName("datvo").setMaster("local[2]").set("spark.executor.memory","2g")
 
-#create object
-data = [
-    {"id": 1, "name": "dat"},
-    {"id": 2, "name": "tri"},
-    {"id": 3, "name": "vo"}
+obj = [
+    {"1" : "dat"},
+    {"2": "vo"},
+    {"tri": 1}
 ]
 
-#create rdd from data
-rdd = sc.parallelize(data)
-print(rdd.collect()) #in dưới dạng list
-print(f"number of list: {rdd.count()}")
-print(f"first value of data: {rdd.first()} " )
+cnn = SparkContext(conf= config)
+rdd = cnn.parallelize(obj)
+print(rdd.collect())
+
+
