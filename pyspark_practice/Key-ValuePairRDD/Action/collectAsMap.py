@@ -9,3 +9,4 @@ table_new = table.join(table1)
 # print(table_new.collect())
 
 print(table.collectAsMap())
+print(table_new.collectAsMap())
