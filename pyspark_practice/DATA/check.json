@@ -1,0 +1,95 @@
+{
+    "id": "2615567702",
+    "type": "IssueCommentEvent",
+    "actor": {
+        "id": 1686778,
+        "login": "dr-dimitru",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/dr-dimitru",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1686778?"
+    },
+    "repo": {
+        "id": 27314425,
+        "name": "VeliovGroup/ostrio-Neo4jreactivity",
+        "url": "https://api.github.com/repos/VeliovGroup/ostrio-Neo4jreactivity"
+    },
+    "payload": {
+        "action": "created",
+        "issue": {
+            "url": "https://api.github.com/repos/VeliovGroup/ostrio-Neo4jreactivity/issues/19",
+            "labels_url": "https://api.github.com/repos/VeliovGroup/ostrio-Neo4jreactivity/issues/19/labels{/name}",
+            "comments_url": "https://api.github.com/repos/VeliovGroup/ostrio-Neo4jreactivity/issues/19/comments",
+            "events_url": "https://api.github.com/repos/VeliovGroup/ostrio-Neo4jreactivity/issues/19/events",
+            "html_url": "https://github.com/VeliovGroup/ostrio-Neo4jreactivity/issues/19",
+            "id": 59402433,
+            "number": 19,
+            "title": "error when running meteor",
+            "user": {
+                "login": "alexfrieden",
+                "id": 1154496,
+                "avatar_url": "https://avatars.githubusercontent.com/u/1154496?v=3",
+                "gravatar_id": "",
+                "url": "https://api.github.com/users/alexfrieden",
+                "html_url": "https://github.com/alexfrieden",
+                "followers_url": "https://api.github.com/users/alexfrieden/followers",
+                "following_url": "https://api.github.com/users/alexfrieden/following{/other_user}",
+                "gists_url": "https://api.github.com/users/alexfrieden/gists{/gist_id}",
+                "starred_url": "https://api.github.com/users/alexfrieden/starred{/owner}{/repo}",
+                "subscriptions_url": "https://api.github.com/users/alexfrieden/subscriptions",
+                "organizations_url": "https://api.github.com/users/alexfrieden/orgs",
+                "repos_url": "https://api.github.com/users/alexfrieden/repos",
+                "events_url": "https://api.github.com/users/alexfrieden/events{/privacy}",
+                "received_events_url": "https://api.github.com/users/alexfrieden/received_events",
+                "type": "User",
+                "site_admin": false
+            },
+            "labels": [],
+            "state": "open",
+            "locked": false,
+            "assignee": null,
+            "milestone": null,
+            "comments": 2,
+            "created_at": "2015-03-01T16:06:25Z",
+            "updated_at": "2015-03-01T17:00:01Z",
+            "closed_at": null,
+            "body": "Getting the following error and trying to find what the issue might be:\r\n\r\n```\r\nW20150301-10:59:41.459(-5)? (STDERR)\r\nW20150301-10:59:41.460(-5)? (STDERR) /Users/alexander.frieden/.meteor/packages/meteor-tool/.1.0.38.dyr4zt++os.osx.x86_64+web.browser+web.cordova/meteor-tool-os.osx.x86_64/dev_bundle/server-lib/node_modules/fibers/future.js:173\r\nW20150301-10:59:41.460(-5)? (STDERR) \t\t\t\t\t\tthrow(ex);\r\nW20150301-10:59:41.461(-5)? (STDERR) \t\t\t\t\t\t      ^\r\nW20150301-10:59:41.467(-5)? (STDERR) TypeError: Object #<Object> has no method 'npmRequire'\r\nW20150301-10:59:41.468(-5)? (STDERR)     at Meteor.neo4j (packages/ostrio:neo4jreactivity/ostrio:neo4jreactivity_driver.js:12:1)\r\nW20150301-10:59:41.468(-5)? (STDERR)     at /Users/alexander.frieden/projects/core-modules/meteor-app/.meteor/local/build/programs/server/packages/ostrio_neo4jreactivity.js:707:4\r\nW20150301-10:59:41.468(-5)? (STDERR)     at /Users/alexander.frieden/projects/core-modules/meteor-app/.meteor/local/build/programs/server/packages/ostrio_neo4jreactivity.js:822:3\r\nW20150301-10:59:41.468(-5)? (STDERR)     at /Users/alexander.frieden/projects/core-modules/meteor-\r\napp/.meteor/local/build/programs/server/boot.js:175:10\r\nW20150301-10:59:41.468(-5)? (STDERR)     at Array.forEach (native)\r\nW20150301-10:59:41.468(-5)? (STDERR)     at Function._.each._.forEach (/Users/alexander.frieden/.meteor/packages/meteor-tool/.1.0.38.dyr4zt++os.osx.x86_64+web.browser+web.cordova/meteor-tool-os.osx.x86_64/dev_bundle/server-lib/node_modules/underscore/underscore.js:79:11)\r\nW20150301-10:59:41.468(-5)? (STDERR)     at /Users/alexander.frieden/projects/core-modules/meteor-app/.meteor/local/build/programs/server/boot.js:86:5\r\n```\r\n\r\nAny thoughts on what this might be?\r\n"
+        },
+        "comment": {
+            "url": "https://api.github.com/repos/VeliovGroup/ostrio-Neo4jreactivity/issues/comments/76612923",
+            "html_url": "https://github.com/VeliovGroup/ostrio-Neo4jreactivity/issues/19#issuecomment-76612923",
+            "issue_url": "https://api.github.com/repos/VeliovGroup/ostrio-Neo4jreactivity/issues/19",
+            "id": 76612923,
+            "user": {
+                "login": "dr-dimitru",
+                "id": 1686778,
+                "avatar_url": "https://avatars.githubusercontent.com/u/1686778?v=3",
+                "gravatar_id": "",
+                "url": "https://api.github.com/users/dr-dimitru",
+                "html_url": "https://github.com/dr-dimitru",
+                "followers_url": "https://api.github.com/users/dr-dimitru/followers",
+                "following_url": "https://api.github.com/users/dr-dimitru/following{/other_user}",
+                "gists_url": "https://api.github.com/users/dr-dimitru/gists{/gist_id}",
+                "starred_url": "https://api.github.com/users/dr-dimitru/starred{/owner}{/repo}",
+                "subscriptions_url": "https://api.github.com/users/dr-dimitru/subscriptions",
+                "organizations_url": "https://api.github.com/users/dr-dimitru/orgs",
+                "repos_url": "https://api.github.com/users/dr-dimitru/repos",
+                "events_url": "https://api.github.com/users/dr-dimitru/events{/privacy}",
+                "received_events_url": "https://api.github.com/users/dr-dimitru/received_events",
+                "type": "User",
+                "site_admin": false
+            },
+            "created_at": "2015-03-01T17:00:01Z",
+            "updated_at": "2015-03-01T17:00:01Z",
+            "body": "Also will publish an update today to switch to native NPM.require\n"
+        }
+    },
+    "public": true,
+    "created_at": "2015-03-01T17:00:02Z",
+    "org": {
+        "id": 1717470,
+        "login": "VeliovGroup",
+        "gravatar_id": "",
+        "url": "https://api.github.com/orgs/VeliovGroup",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1717470?"
+    }
+}
