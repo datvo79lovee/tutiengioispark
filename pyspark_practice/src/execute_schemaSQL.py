@@ -5,7 +5,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-# Đọc file .env tại thư mục gốc D:\de_rm
 env_path = Path(__file__).resolve().parents[2] / ".env"
 load_dotenv(env_path)
 
